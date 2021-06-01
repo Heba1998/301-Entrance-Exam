@@ -1,0 +1,48 @@
+body {
+    background-image: url(background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#head{
+    background-color: rgba(202, 240, 251, 255);
+    width: 100%;
+    height: 100px;
+    
+}
+#logo{
+    float: left;
+    height: 100px;
+    width: 150px;
+}
+h1{
+    color: white;
+    text-align: center;
+
+}
+
+form {
+    background-color:#5d4b7696;
+    padding: 12px 20px;
+  margin: 8px 30px;
+  padding: 30px;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+width: 20%;
+color:  white;
+font-size: 20px;
+/* text-align: center; */
+/* align-content: center; */
+   
+}
+
+
+footer{
+    color:#f376a288;
+}
+label, input{
+    display: block;
+
+}
