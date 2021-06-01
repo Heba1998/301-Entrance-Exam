@@ -30,12 +30,11 @@ trip = new Trip (name,place,transport);
 };
 
 let ResultRender =function(){
-    Trip.all=JSON.parse(localStorage.getItem('trip'));
+    let Result= document.createElement('p')
+    let Result1=document.createElement('p');
     for (let index = 0; index < Trip.all.length; index++) {
-        let Result= document.createElement('p')
-        let Result1=document.createElement('p');
-
-
+        
+        
         let PlaceName=document.createElement('p');
         PlaceName.textContent=`'Place Name:' + ${Trip.all[index].name}`;
         Result1.appendChild(PlaceName);
@@ -48,10 +47,11 @@ let ResultRender =function(){
         let TypeOfTransport=document.createElement('p');
         TypeOfTransport.textContent=`'Type Of Transport : ' + ${Trip.all[index].transport}`;
         Result1.appendChild(TypeOfTransport);
-
+        
         Result.appendChild(Result1);
-
+        
     };
+    Trip.all=JSON.parse(localStorage.getItem('trip'));
     ResultRender();
 }
 
