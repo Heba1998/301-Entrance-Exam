@@ -24,7 +24,8 @@ h1{
 form {
     background-color:#5d4b7696;
     padding: 12px 20px;
-  margin: 8px 30px;
+  margin-top: 10% ;
+  margin-left: 15%;
   padding: 30px;
   display: block;
   border: 1px solid #ccc;
@@ -33,8 +34,8 @@ form {
 width: 20%;
 color:  white;
 font-size: 20px;
-/* text-align: center; */
-/* align-content: center; */
+float: left;
+
    
 }
 
@@ -45,4 +46,29 @@ footer{
 label, input{
     display: block;
 
+}
+
+#result {
+    background-color:#5d4b7696;
+    padding: 12px 20px;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 40%;
+    color:  white;
+    font-size: 20px;
+    float: right;
+    margin-top: 10% ;
+  margin-right: 15%;
+    padding: 30px;
+   
+}
+
+img{
+    height: 150px;
+    width: 150px;
+    float: left;
+    margin-right: 30px;
+    /* margin-top: 40px; */
 }

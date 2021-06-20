@@ -1,58 +1,101 @@
 'use strict';
-let Trip=function(name, place,transport){
-    this.name=name;
-    this.place=place;
-    this.transport=transport;
-    Trip.all.push(this);
+
+let Trip = function (name,place, transport) {
+  this.name = name;
+  this.place = place;
+  this.transport = transport;
+  this.img=`${place}.png`
+  Trip.all.push(this);
 };
-Trip.all=[];
+Trip.all = [];
 
-let form = document.getElementById('form')
+// DOM Elements
+let form = document.getElementById('form');
+let result = document.getElementById('result');
 
-Trip.prototype.addToLocalStorage=function(){
-    localStorage.setItem('trip', JSON.stringify(Trip.all));
-};
 
-let submit=function(event){
-    event.preventDefault();
-    
-    let name=event.target.name.value;
-    let place=event.target.place.value;
-    let transport=event.target.transport.value;
 
-    let trip;
-trip = new Trip (name,place,transport);
-    trip.addToLocalStorage();
-    
-    
-    ResultRender();
-    form.reset(); //buld in function
+
+Trip.prototype.addTolocalStorage = function () {
+  localStorage.setItem('trips', JSON.stringify(Trip.all));
 };
 
-let ResultRender =function(){
-    let Result= document.createElement('p')
-    let Result1=document.createElement('p');
-    for (let index = 0; index < Trip.all.length; index++) {
-        
-        
-        let PlaceName=document.createElement('p');
-        PlaceName.textContent=`'Place Name:' + ${Trip.all[index].name}`;
-        Result1.appendChild(PlaceName);
-        
-        let TripPlace=document.createElement('p');
-        TripPlace.textContent=`'Trip place: '  + ${Trip.all[index].place}`;
-        Result1.appendChild(TripPlace);
-        
-        
-        let TypeOfTransport=document.createElement('p');
-        TypeOfTransport.textContent=`'Type Of Transport : ' + ${Trip.all[index].transport}`;
-        Result1.appendChild(TypeOfTransport);
-        
-        Result.appendChild(Result1);
-        
-    };
-    Trip.all=JSON.parse(localStorage.getItem('trip'));
-    ResultRender();
-}
+// //Event listners functions decleration
+let Submit = function (event) {
+  event.preventDefault();
+  let name = event.target.name.value;
+  let place=event.target.place.value;
+  let transport = event.target.transport.value;
 
-form.addEventListener('submit', submit);
+  let trip = new Trip(name,place, transport);
+  trip.addTolocalStorage();
+  
+  ResultRender();
+  form.reset();
+};
+
+let REMOVE = function (event) {
+  if (event.target.matches('.remove')) {
+    Trip.all.splice(event.target.id, 1);
+    if (Trip.all.lengp !== 0) {
+      localStorage.setItem('trips', JSON.stringify(Trip.all));
+      ResultRender();
+    } else {
+      localStorage.removeItem('trips');
+      ResultRender();
+    }
+
+  }
+};
+
+
+let ResultRender = function () {
+  if (localStorage.Trip) {
+    Trip.all = JSON.parse(localStorage.getItem('trips'));}
+  // } else {
+  //   Trip.all=[];
+  // }
+  result.innerHTML = '';
+
+
+  let div = document.createElement('div');
+  for (let index = 0; index < Trip.all.length; index++) {
+
+
+    let img=document.createElement('img');
+    img.src=Trip.all[index].img;
+    div.appendChild(img);
+
+    let placeName = document.createElement('p');
+    placeName.textContent = `place name : ${Trip.all[index].name}`;
+    div.appendChild(placeName);
+
+    let place = document.createElement('p');
+    place.textContent = `Trip place : ${Trip.all[index].place}`;
+    div.appendChild(place);
+
+
+    let transport = document.createElement('p');
+    transport.textContent = `Type of transport: ${Trip.all[index].transport}`;
+    div.appendChild(transport);
+
+   
+
+    let remove = document.createElement('p');
+    remove.innerHTML = `Remove : <span class="remove" id="${index}">X</span>`;
+    div.appendChild(remove);
+
+   let HR = document.createElement('hr');
+   div.appendChild(HR);
+  }
+
+  result.appendChild(div);
+
+};
+ResultRender();
+
+
+// Event Listners
+
+form.addEventListener('submit', Submit);
+result.addEventListener('click', REMOVE);
